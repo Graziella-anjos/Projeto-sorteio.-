@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br"> 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorteio de Nomes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        input, button {
+            padding: 10px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sorteio de Nomes</h1>
+    <input type="text" id="nomeInput" placeholder="Digite um nome">
+    <button onclick="adicionarNome()">Adicionar Nome</button>
+    <ul id="listaNomes"></ul>
+    <button onclick="sortearNome()">Sortear</button>
+    <h2 id="resultado"></h2>
+
+    <script>
+        let nomes = [];
+
+        function adicionarNome() {
+            const nomeInput = document.getElementById("nomeInput");
+            const nome = nomeInput.value.trim();
+            if (nome) {
+                nomes.push(nome);
+                atualizarLista();
+                nomeInput.value = "";
+            }
+        }
+
+        function atualizarLista() {
+            const lista = document.getElementById("listaNomes");
+            lista.innerHTML = "";
+            nomes.forEach(nome => {
+                const li = document.createElement("li");
+                li.textContent = nome;
+                lista.appendChild(li);
+            });
+        }
+
+        function sortearNome() {
+            if (nomes.length > 0) {
+                const indiceSorteado = Math.floor(Math.random() * nomes.length);
+                document.getElementById("resultado").textContent = "Nome sorteado: " + nomes[indiceSorteado];
+            } else {
+                document.getElementById("resultado").textContent = "Adicione nomes antes de sortear!";
+            }
+        }
+    </script>
+</body>
+</html>
+
+
